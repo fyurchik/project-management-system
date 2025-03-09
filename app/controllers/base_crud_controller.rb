@@ -1,13 +1,8 @@
 class BaseCrudController < ApplicationController
   def index
-    cache_key = "projects:#{current_user.id}"
-
-    data = Rails.cache.fetch(cache_key, expires_in: 10.seconds) do
-      resource_class::List.call(search_params, current_user)
-    end
+    data = resource_class::List.call(search_params)
     render_json_response(true, data, :ok)
   end
-
 
   def show
     data = resource_class::Show.call(resource)

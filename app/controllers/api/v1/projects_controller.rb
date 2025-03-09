@@ -2,15 +2,12 @@ module Api
   module V1
     class ProjectsController < BaseCrudController
       def index
-        cache_key = "projects/index/#{current_user.id}/#{params.to_json}"
+        cache_key = "projects:#{current_user.id}"
 
-        if (cached_data = Rails.cache.read(cache_key))
-          render_json_response(true, cached_data, :ok)
-        else
-          data = resource_class::List.call(search_params, current_user)
-          Rails.cache.write(cache_key, data, expires_in: 10.seconds)
-          render_json_response(true, data, :ok)
+        data = Rails.cache.fetch(cache_key, expires_in: 10.seconds) do
+          resource_class::List.call(search_params, current_user)
         end
+        render_json_response(true, data, :ok)
       end
 
       def create
