@@ -13,6 +13,10 @@ class BaseListService
     raise NotImplementedError, "Subclasses must implement the 'call' method."
   end
 
+  def resource
+    @resource = resource_class.filter(params)
+  end
+
   private
 
   def resource_class
