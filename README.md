@@ -1,24 +1,57 @@
-# README
+## Prerequisites
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Before you start, make sure you have the following installed:
+- Ruby 3.3.5
+- Rails 8.0.1
+- PostgreSQL
 
-Things you may want to cover:
+## 1. Clone the Repository
 
-* Ruby version
+Clone the repository to your local machine:
 
-* System dependencies
+```bash
+git clone https://github.com/fyurchik/project-management-system.git
+cd project-management-system
+```
+## Prerequisites
+Run bundle to install the required Ruby gems:
 
-* Configuration
+```bash
+bundle install
+```
 
-* Database creation
+## Setup Environment Variables
+Create the .env file:
 
-* Database initialization
+```bash
+touch .env
+```
 
-* How to run the test suite
+Inside the .env file, set the following variables:
 
-* Services (job queues, cache servers, search engines, etc.)
+```bash
+DEVISE_JWT_SECRET_KEY=your_jwt_secret_key_here
+```
 
-* Deployment instructions
+To generate the DEVISE_JWT_SECRET_KEY, run the following command:
 
-* ...
+```bash
+rails secret
+```
+
+### Database Setup
+```bash
+rails db:create
+rails db:migrate
+```
+
+### Running the Application
+```bash
+rails s
+```
+
+### Running Tests
+```bash
+bundle exec rspec
+```
+
