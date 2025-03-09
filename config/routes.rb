@@ -12,4 +12,13 @@ Rails.application.routes.draw do
       registrations: "users/registrations"
     }
 
+  namespace :api do
+    namespace :v1 do
+      resources :projects, only: %i[index show create update destroy] do
+        resources :tasks, only: %i[show create update destroy]
+      end
+
+      resources :tasks, only: %i[index]
+    end
+  end
 end
