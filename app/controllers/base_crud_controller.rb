@@ -26,10 +26,6 @@ class BaseCrudController < ApplicationController
 
   private
 
-  def resource
-    @resource = resource_class.find(params[:id])
-  end
-
   def resource_class
     raise NotImplementedError, "Subclasses must implement the 'resource_class' method."
   end
